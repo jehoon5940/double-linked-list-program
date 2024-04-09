@@ -42,3 +42,26 @@ void insertNode(linkedList_h* DL, listNode* pre, char* x) {
         if (newNode->rlink != NULL) 
             newNode->rlink->link = newNode;
 }
+
+
+// 이중 연결 리스트에서 old 노드를 삭제하는 연산 
+void deleteNode(linkedList_h* DL, listNode* old) { 
+    if (DL->head == NULL) return; 
+    else if (old == NULL) return;
+    else {
+        old->llink->rlink = old->rlink;
+        old->rlink->llink = old->llink; 
+        free(old);
+    }
+}
+
+// 리스트에서 X 노드를 탐색하는 연산
+listNode* searchNode(linkedlist_h* DL, char* x) {
+    listNode* temp;
+    temp = DL->head;
+    while (temp != NULL) {
+        if (strcmp(temp->data, x) == 0) return temp; 
+        else temp = temp->rlink;
+    }
+    return temp;
+}
